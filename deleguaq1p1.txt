@@ -1,0 +1,28 @@
+//05/06//*
+
+var idade: inteiro
+var peso: real
+var cintura: real
+var índiceABC, índiceXYZ: real
+
+idade = inteiro(leia("Qual é a sua idade em anos?"))
+peso = real(leia("Qual é o seu peso (em quilogramas)?"))
+cintura = real(leia("Qual a medida da sua cintura (em metros)?"))
+
+escreva("idade = ${idade} anos")
+escreva("peso = ${peso} kg")
+escreva("cintura = ${cintura} m")
+
+índiceABC = (idade * peso)/cintura
+índiceXYZ = ((peso * 90)-idade)*cintura
+
+escreva("índiceABC = ${índiceABC}")
+escreva("índiceXYZ = ${índiceXYZ}")
+
+se (índiceABC < índiceXYZ) {
+    escreva('indiceXYZ é menor do que indiceABC');
+} senao se (índiceABC > índiceXYZ) {
+    escreva('indiceXYZ é maior do que indiceABC');
+} senao {
+    escreva('indiceXYZ e índiceABC são iguais');
+}

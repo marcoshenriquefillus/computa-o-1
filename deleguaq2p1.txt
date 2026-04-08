@@ -1,0 +1,32 @@
+constante N: inteiro = 3 
+
+var nota1, nota2: real 
+var media: real
+var chute: real
+var soma: real
+
+soma = 0
+
+para (var i = 1; i <= N; i = i + 1) {
+nota1 = real(leia("Digite a nota 1 do aluno"))
+nota2 = real(leia("Digite a nota 2 do aluno"))
+
+    media = (nota1*4+nota2*7)/(4+7)
+    escreva("A média ponderada do aluno foi ${media}!")
+    soma = soma+media
+}
+
+var super_média: real = soma/N
+
+fazer
+{
+ chute = real(leia('Qual o valor da super média?')); 
+    se (chute < super_média) {
+        escreva('Valor demais de baixo!');
+    } se (chute > super_média) {
+        escreva('Valor demais de alto!');
+    } senao {
+        escreva('Parabéns, você é uma pessoa de muita sorte!');
+    }
+    
+} enquanto(chute != super_média)
