@@ -1,0 +1,28 @@
+#include<stdio.h>
+
+int main() {
+	float n1, n2, n3, media_aritmetica, media_ponderada, media_geometrica, media_harmônica;
+    char entrada [100];
+    
+ printf("Digite o primeiro numero: ");
+    if (scanf("%f", &n1) != 1) {
+        printf("Erro: Digite apenas numeros validos!\n");
+        return 1;
+    }
+    
+    printf("Digite o segundo numero: ");
+    if (scanf("%f", &n2) != 1) {
+        printf("Erro: Digite apenas numeros validos!\n");
+        return 1;
+    }
+    
+    printf("Digite o terceiro numero: ");
+    if (scanf("%f", &n3) != 1) {
+        printf("Erro: Digite apenas numeros validos!\n");
+        return 1;
+    }
+    
+    printf("Escolha entre A, P, G e H: ");
+    scanf("%99s", &entrada);
+        return 1;
+    }
