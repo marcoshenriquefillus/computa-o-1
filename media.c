@@ -17,22 +17,22 @@
 
 int main()
 {
-    setlocale(LC_ALL, "Portuguese");
-    
-    float a, b, c, media;
-    const int n = 4;
-    const int peso1 = 2;
-    const int peso2 = 3;
-    const int peso3 = 5;
-    int i;
-    
-    for (i=1; i<=n; i++)
-    {
-    printf("\nEscreva três valores: ");
-    scanf ("%f %f %f", &a, &b, &c);
-         printf("Valores digitados: %.1f %.1f %.1f \n", a, b, c);
+	setlocale(LC_ALL, "Portuguese");
 
-    media = (a * peso1 + b * peso2 + c * peso3) / (peso1 + peso2 + peso3);
-        printf("média ponderada: %.1f", media);
-   }
+	float a, b, c, media;
+	const int n = 4;
+	const int peso1 = 2;
+	const int peso2 = 3;
+	const int peso3 = 5;
+	int i;
+
+	for (i=1; i<=n; i++)
+	{
+		printf("\nEscreva três valores: ");
+		scanf ("%f %f %f", &a, &b, &c);
+		printf("Valores digitados: %.1f %.1f %.1f \n", a, b, c);
+
+		media = (a * peso1 + b * peso2 + c * peso3) / (peso1 + peso2 + peso3);
+		printf("média ponderada: %.1f", media);
+	}
 }
