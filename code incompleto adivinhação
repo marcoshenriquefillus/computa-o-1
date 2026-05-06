@@ -1,0 +1,52 @@
+/******************************************************************************
+Escreva um programa que sorteia um número entre 1 e 20. O usuário deve adivinhar este número. Quando o usuário conseguir acertar o número, o programa deverá classificar o usuário como:
+
+ÓTIMO: se ele conseguiu em 1 a 3 tentativas;
+BOM: 4 a 6 tentativas;
+FRACO: 7 a 10 tentativas;
+PÉSSIMO: Mais que 10 tentativas.
+Escreva a classificação do usuário na tela.
+
+Caso o usuário não tenha sido classificado como ÓTIMO ou BOM, o programa recomeça
+*******************************************************************************/
+
+#include <stdio.h>
+#include <locale.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main ()
+{
+     setlocale(LC_ALL, "Portuguese");
+    srand(time(0));
+    
+
+    int numero_secreto = (rand()%20)+1;
+    int chute=numero_secreto+1;
+    const int tentativa = 1;
+    int Nchutes = 1;
+    
+    while(chute != numero_secreto)
+    {
+
+        printf("Digite o número secreto: ");
+        scanf("%d", &chute);
+
+        if (chute>numero_secreto)
+            printf("O número que você chutou é maior que o número secreto!\n");
+        else if (chute<numero_secreto)
+            printf("O número que você chutou é menor que o número secreto!\n");
+        Nchutes = (Nchutes + tentativa);
+    }
+    if (Nchutes<=3)
+        printf("Ótimo");
+    else if (4<=Nchutes<=6)
+        printf("Bom");
+    else if (7<=Nchutes<=10)
+        printf("Fraco");
+    else if (Nchutes>10)
+        printf("Péssimo");
+
+    
+    
+}
