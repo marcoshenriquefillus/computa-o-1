@@ -30,9 +30,9 @@ int main()
     {
     printf("\nEscreva três valores: ");
     scanf ("%f %f %f", &a, &b, &c);
-         printf("Valores digitados: %.2f %.2f %.2f \n", a, b, c);
+         printf("Valores digitados: %.1f %.1f %.1f \n", a, b, c);
 
     media = (a * peso1 + b * peso2 + c * peso3) / (peso1 + peso2 + peso3);
-        printf("média ponderada: %.2f", media);
+        printf("média ponderada: %.1f", media);
    }
 }
