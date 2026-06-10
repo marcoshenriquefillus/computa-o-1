@@ -30,3 +30,26 @@ void mostrarTabuleiro()
 
     printf("\n");
 }
+
+int posicaoValida(int l,int c)
+{
+    if(l<0 || l>=TAM || c<0 || c>=TAM)
+        return 0;
+
+    if(tab[l][c] != '.')
+        return 0;
+
+    if(congeladaTurnos>0 &&
+       l==congeladaLinha &&
+       c==congeladaColuna)
+        return 0;
+
+    return 1;
+}
+
+void congelarCasas()
+{
+    congeladaLinha = 1;
+    congeladaColuna = 2;
+    congeladaTurnos = 1;
+}
