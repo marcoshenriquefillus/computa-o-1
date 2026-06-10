@@ -4,6 +4,15 @@
 
 #define TAM 5
 
+char tab[TAM][TAM];
+
+int pontos[3] = {0,0,0};
+int perdeRodada[3] = {0,0,0};
+
+int congeladaLinha = -1;
+int congeladaColuna = -1;
+int congeladaTurnos = 0;
+
 void inicializarTabuleiro()
 {
     for(int i=0;i<TAM;i++)
@@ -52,4 +61,176 @@ void congelarCasas()
     congeladaLinha = 1;
     congeladaColuna = 2;
     congeladaTurnos = 1;
+}
+
+int contarSequencias(char simbolo)
+{
+    int total=0;
+
+    for(int i=0;i<TAM;i++)
+    {
+        int cont=0;
+        for(int j=0;j<TAM;j++)
+        {
+            if(tab[i][j]==simbolo)
+                cont++;
+            else
+                cont=0;
+
+            if(cont==3) total+=1;
+            if(cont==4) total+=2;
+            if(cont==5) total+=3;
+        }
+    }
+
+    for(int j=0;j<TAM;j++)
+    {
+        int cont=0;
+        for(int i=0;i<TAM;i++)
+        {
+            if(tab[i][j]==simbolo)
+                cont++;
+            else
+                cont=0;
+
+            if(cont==3) total+=1;
+            if(cont==4) total+=2;
+            if(cont==5) total+=3;
+        }
+    }
+
+    return total;
+}
+
+void trocaSimbolo(char simbolo)
+{
+    int l,c;
+
+    printf("Troca de simbolo ativada!\n");
+
+    do
+    {
+        printf("Escolha linha (0 a  4) e coluna (0 a 4) para converter: ");
+        scanf("%d %d",&l,&c);
+
+    }while(l<0 || l>=TAM || c<0 || c>=TAM ||
+           tab[l][c]=='.' ||
+           tab[l][c]==simbolo);
+
+    tab[l][c]=simbolo;
+}
+
+void verificarRodadaPerdida(int jogador,int l,int c)
+{
+    int iguais=0;
+
+    int dx[4]={-1,1,0,0};
+    int dy[4]={0,0,-1,1};
+
+    for(int i=0;i<4;i++)
+    {
+        int nl=l+dx[i];
+        int nc=c+dy[i];
+
+        if(nl>=0 && nl<TAM && nc>=0 && nc<TAM)
+        {
+            if(tab[nl][nc]!='.' &&
+               tab[nl][nc]!=(jogador==0?'X':
+                             jogador==1?'O':'^'))
+            {
+                iguais++;
+            }
+        }
+    }
+
+    if(iguais>=2)
+    {
+        perdeRodada[jogador]=1;
+        printf("Jogador perdera a proxima rodada!\n");
+    }
+}
+
+int tabuleiroCheio()
+{
+    for(int i=0;i<TAM;i++)
+    {
+        for(int j=0;j<TAM;j++)
+        {
+            if(tab[i][j]=='.')
+                return 0;
+        }
+    }
+
+    return 1;
+}
+
+void jogadaHumano(int jogador,char simbolo)
+{
+    int l,c;
+
+    do
+    {
+        printf("Jogador %d (%c)\n",jogador+1,simbolo);
+        printf("Linha e coluna: ");
+        scanf("%d %d",&l,&c);
+
+    }while(!posicaoValida(l,c));
+
+    tab[l][c]=simbolo;
+
+    if(l==2 && c==2)
+    {
+        congelarCasas();
+        printf("Casa central ativou congelamento!\n");
+    }
+
+    verificarRodadaPerdida(jogador,l,c);
+
+    int antes=pontos[jogador];
+    pontos[jogador]=contarSequencias(simbolo);
+
+    if(pontos[jogador]>antes)
+    {
+        trocaSimbolo(simbolo);
+    }
+}
+
+void jogadaComputador()
+{
+    int l,c;
+
+    do
+    {
+        l=rand()%5;
+        c=rand()%5;
+    }while(!posicaoValida(l,c));
+
+    printf("Computador jogou em (%d,%d)\n",l,c);
+
+    tab[l][c]='^';
+
+    verificarRodadaPerdida(2,l,c);
+
+    int antes=pontos[2];
+    pontos[2]=contarSequencias('^');
+
+    if(pontos[2]>antes)
+    {
+        for(int i=0;i<TAM;i++)
+        {
+            int achou=0;
+
+            for(int j=0;j<TAM;j++)
+            {
+                if(tab[i][j]!='.' && tab[i][j]!='^')
+                {
+                    tab[i][j]='^';
+                    achou=1;
+                    break;
+                }
+            }
+
+            if(achou) break;
+        }
+    }
 }
