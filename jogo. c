@@ -110,7 +110,7 @@ void trocaSimbolo(char simbolo)
 
     do
     {
-        printf("Escolha linha (0 a  4) e coluna (0 a 4) para converter: ");
+        printf("Escolha linha e coluna para converter: ");
         scanf("%d %d",&l,&c);
 
     }while(l<0 || l>=TAM || c<0 || c>=TAM ||
@@ -234,10 +234,67 @@ void jogadaComputador()
         }
     }
 }
+
 int main()
 {
+    srand(time(NULL));
 
+    inicializarTabuleiro();
 
+    while(!tabuleiroCheio())
+    {
+        mostrarTabuleiro();
 
+        if(!perdeRodada[0])
+            jogadaHumano(0,'X');
+        else
+        {
+            printf("Marcos perdeu a rodada!\n");
+            perdeRodada[0]=0;
+        }
 
+        if(tabuleiroCheio()) break;
+
+        if(!perdeRodada[1])
+            jogadaHumano(1,'O');
+        else
+        {
+            printf("Paulo perdeu a rodada!\n");
+            perdeRodada[1]=0;
+        }
+
+        if(tabuleiroCheio()) break;
+
+        if(!perdeRodada[2])
+            jogadaComputador();
+        else
+        {
+            printf("Computador perdeu a rodada!\n");
+            perdeRodada[2]=0;
+        }
+
+        if(congeladaTurnos>0)
+            congeladaTurnos--;
+    }
+
+    mostrarTabuleiro();
+
+    printf("\n=== PONTUACAO FINAL ===\n");
+    printf("Marcos (X): %d\n",pontos[0]);
+    printf("Paulo (O): %d\n",pontos[1]);
+    printf("Computador (^): %d\n",pontos[2]);
+
+    if(pontos[0]>pontos[1] && pontos[0]>pontos[2])
+        printf("Marcos venceu!\n");
+
+    else if(pontos[1]>pontos[0] && pontos[1]>pontos[2])
+        printf("Paulo venceu!\n");
+
+    else if(pontos[2]>pontos[0] && pontos[2]>pontos[1])
+        printf("Computador venceu!\n");
+
+    else
+        printf("Empate!\n");
+
+    return 0;
 }
